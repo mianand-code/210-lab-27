@@ -114,4 +114,39 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
         cout << "ERROR: Name field cannot remain blank. Please try again & enter a name: ";
         getline(cin, name);
     }
+
+    // get user input for friendship level
+    // creation of a do-while loop for user input validatio - ensure the friendship level entered is within the valid range 0-10 
+    do {
+        cout << "Friendship level (must be between 0-10): ";
+        cin >> friendshipLevel;
+
+        if (friendshipLevel < 0 || friendshipLevel > 10)
+            cout << "ERROR: Friendship level must be within the range of 0-10. Please enter a valid level and try again." << endl;
+
+    } while (friendshipLevel < 0 || friendshipLevel > 10);
+    cin.ignore(); // needed before we can read another string input
+
+    // get user input for species of villager
+    cout << "Species: ";
+    getline(cin, species);
+    while (species.empty()) // user input validation, to ensure the field is not left blank
+    {
+        cout << "ERROR: Species field cannot remain blank. Please try again & enter a species: ";
+        getline(cin, species);
+    }
+
+    // get user input for villager's catchphrase
+    cout << "Catchphrase: ";
+    getline(cin, catchphrase);
+    while (catchphrase.empty()) // user input validation, to ensure the field is not left blank
+    {
+        cout << "ERROR: Catchphrase field cannot remain blank. Please try again & enter a catchphrase: ";
+        getline(cin, catchphrase);
+    }
+
+    // create a tuple with the user-entered data and add it to the std::map
+    // user-entered "name" is used as the key for the std::map
+    villagerMember[name] = tuple<int, string, string>(friendshipLevel, species, catchphrase);
+    cout << name << " added." << endl;
 }
