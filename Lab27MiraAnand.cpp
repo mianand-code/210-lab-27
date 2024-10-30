@@ -12,13 +12,13 @@
 using namespace std;
 
 // function prototypes
-void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember);
+void outputVillagerDetails(const map<string, tuple<int, string, string>> villagerMember);
 void main_menu();
 void addVillager(map<string, tuple<int, string, string>>& villagerMember);
 void deleteVillager(map<string, tuple<int, string, string>>& villagerMember);
 void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember);
 void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember);
-void searchForVillager(const map<string, tuple<int, string, string>>& villagerMember);
+void searchForVillager(const map<string, tuple<int, string, string>> villagerMember);
 
 int main() 
 {
@@ -54,13 +54,13 @@ int main()
     return 0;
 }
 
-// void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember) function header
+// void outputVillagerDetails(const map<string, tuple<int, string, string>> villagerMember) function header
 // DESCRIPTION: this function will output the map's contents of villager data/members
-// ARGUMENTS: const map<string, tuple<int, string, string>>& villagerMember
+// ARGUMENTS: const map<string, tuple<int, string, string>> villagerMember
 // - this refers to the std::map "villagerMember"
 // - using const to signify that the map should not change
 // RETURNS: nothing, void function
-void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember)
+void outputVillagerDetails(const map<string, tuple<int, string, string>> villagerMember)
 {
     // access the map using a range-based for loop
     cout << "Villager details:" << endl;
@@ -92,9 +92,11 @@ void main_menu()
 }
 
 // void addVillager(map<string, tuple<int, string, string>>& villagerMember) function header
-// DESCRIPTION:
+// DESCRIPTION: this function prompts the user to enter information in order to add a new villager to the std::map
+// - all user input is validated and the user will continue to be prompted to enter information until they enter a valid response
 // ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
 // - this refers to the std::map "villagerMember"
+// - passing by reference because the map will be modified
 // RETURNS: nothing, void function
 void addVillager(map<string, tuple<int, string, string>>& villagerMember)
 {
@@ -145,8 +147,20 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
         getline(cin, catchphrase);
     }
 
-    // create a tuple with the user-entered data and add it to the std::map
-    // user-entered "name" is used as the key for the std::map
+    // add this new villager to the std::map, "villagerMember"
+    // user-entered "name" is used as the key 
+    // for the value - create a tuple with the user-entered data and assign it to the std::map entry/key
     villagerMember[name] = tuple<int, string, string>(friendshipLevel, species, catchphrase);
     cout << name << " added." << endl;
+}
+
+// void deleteVillager(map<string, tuple<int, string, string>>& villagerMember) function header
+// DESCRIPTION:
+// ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
+// - this refers to the std::map "villagerMember"
+// - passing by reference because the map will be modified
+// RETURNS: nothing, void function
+void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
+{
+    int userChoice; // to hold the numbered option of the villager that the user would like to delete
 }
