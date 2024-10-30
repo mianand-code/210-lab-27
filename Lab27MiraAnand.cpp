@@ -2,14 +2,23 @@
 // Module 10, Lesson: std::map & STL Algorithms, Assignment: Villager Map
 // IDE used: Visual Studio Code for Mac
 
+// Disclaimer about the void searchForVillager(const map<string, tuple<int, string, string>>& villagerMember) function:
+// - The function trusts that the user will search for a villager name exactly as it is stored in the std::map. It is case sensitive.
+
 #include <iostream>
 #include <map> // to use std::map
 #include <string>
-#include <tuple> // in order to use std::tuple instead of std::vector as the data structure being held in the std::map
+#include <tuple> // so we can use std::tuple instead of std::vector as the data structure being held in the std::map
 using namespace std;
 
 // function prototypes
-void outputVillagerDetails()
+void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember);
+void main_menu();
+void addVillager(map<string, tuple<int, string, string>>& villagerMember);
+void deleteVillager(map<string, tuple<int, string, string>>& villagerMember);
+void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember);
+void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember);
+void searchForVillager(const map<string, tuple<int, string, string>>& villagerMember);
 
 int main() 
 {
