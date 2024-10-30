@@ -74,3 +74,44 @@ void outputVillagerDetails(const map<string, tuple<int, string, string>>& villag
         cout << get<2>(villager.second) << "]" << endl; // accesses catchphrase
     }
 }
+
+// void main_menu() function header
+// DESCRIPTION: this function will display the villager map menu of numbered options that a user can choose from
+// ARGUMENTS: no arguments/parameters
+// RETURNS: nothing, void function
+void main_menu()
+{
+    cout << "Villager Map Main Menu:" << endl;
+    cout << "[1] Add Villager" << endl;
+    cout << "[2] Delete Villager" << endl;
+    cout << "[3] Increase Friendship" << endl;
+    cout << "[4] Decrease Friendship" << endl;
+    cout << "[5] Search for Villager" << endl;
+    cout << "[6] Exit" << endl;
+    cout << "Choice --> ";
+}
+
+// void addVillager(map<string, tuple<int, string, string>>& villagerMember) function header
+// DESCRIPTION:
+// ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
+// - this refers to the std::map "villagerMember"
+// RETURNS: nothing, void function
+void addVillager(map<string, tuple<int, string, string>>& villagerMember)
+{
+    // declaration of variables section
+    string name; // to hold villager's name
+    int friendshipLevel; // to hold friendship level (0-10)
+    string species; // to hold species of villager
+    string catchphrase; // to hold villager's catchphrase
+
+    cout << "Please enter all required information to add a villager -" << endl;
+
+    // get user input for villager's name
+    cout << "Villager name: ";
+    getline(cin, name);
+    while (name.empty()) // user input validation, to ensure the field is not left blank
+    {
+        cout << "ERROR: Name field cannot remain blank. Please try again & enter a name: ";
+        getline(cin, name);
+    }
+}
