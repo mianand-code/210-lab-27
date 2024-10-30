@@ -55,8 +55,10 @@ int main()
 }
 
 // void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember) function header
-// DESCRIPTION:
-// ARGUMENTS:
+// DESCRIPTION: this function will output the map's contents of villager data/members
+// ARGUMENTS: const map<string, tuple<int, string, string>>& villagerMember
+// - this refers to the std::map "villagerMember"
+// - using const to signify that the map should not change
 // RETURNS: nothing, void function
 void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember)
 {
@@ -64,9 +66,11 @@ void outputVillagerDetails(const map<string, tuple<int, string, string>>& villag
     cout << "Villager details:" << endl;
     for (auto villager : villagerMember) 
     {
-        cout << pair.first << ": ";
-        for (auto color : pair.second)
-            cout << color << " ";
-        cout << endl;
+        // villager.first accesses the key (villager's name - string) of the map
+        // villager.second accesses the value (std::tuple) of the map
+        // get<> is used to access specific elements of the tuple (starts at 0)
+        cout << villager.first << " [" << get<0>(villager.second) << ", "; // accesses friendship level
+        cout << get<1>(villager.second) << ", "; // accesses species
+        cout << get<2>(villager.second) << "]" << endl; // accesses catchphrase
     }
 }
