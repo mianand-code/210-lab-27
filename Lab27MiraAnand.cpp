@@ -36,15 +36,6 @@ int main()
     villagerColors["Raymond"] = {"Black", "Gray", "White"};
     villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
 
-    // access the map using a range-based for loop
-    cout << "Villagers and their favorite colors (range-based for loop):" << endl;
-    for (auto pair : villagerColors) {
-        cout << pair.first << ": ";
-        for (auto color : pair.second)
-            cout << color << " ";
-        cout << endl;
-    }
-
     // delete an element
     villagerColors.erase("Raymond");
 
@@ -61,4 +52,21 @@ int main()
         cout << endl << searchKey << " not found." << endl;
 
     return 0;
+}
+
+// void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember) function header
+// DESCRIPTION:
+// ARGUMENTS:
+// RETURNS: nothing, void function
+void outputVillagerDetails(const map<string, tuple<int, string, string>>& villagerMember)
+{
+    // access the map using a range-based for loop
+    cout << "Villager details:" << endl;
+    for (auto villager : villagerMember) 
+    {
+        cout << pair.first << ": ";
+        for (auto color : pair.second)
+            cout << color << " ";
+        cout << endl;
+    }
 }
