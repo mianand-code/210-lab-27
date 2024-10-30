@@ -3,14 +3,23 @@
 // IDE used: Visual Studio Code for Mac
 
 #include <iostream>
-#include <map>
-#include <vector>
+#include <map> // to use std::map
+#include <string>
+#include <tuple> // in order to use std::tuple instead of std::vector as the data structure being held in the std::map
 using namespace std;
+
+// function prototypes
+void outputVillagerDetails()
 
 int main() 
 {
-    // declarations
-    map<string, vector<string>> villagerColors;
+    // creation of an std::map named "villagerMember"
+    // the key is a string that represents the villager's name
+    // the value is an std::tuple that holds 3 elements:
+    // 1. friendship level, an int value 0-10
+    // 2. species, a string value
+    // 3. catchphrase, a string value
+    map<string, tuple<int, string, string>> villagerMember;
 
     // insert elements into the map
     // note how the right-hand side of the assignment are the vector elements
@@ -24,17 +33,6 @@ int main()
         cout << pair.first << ": ";
         for (auto color : pair.second)
             cout << color << " ";
-        cout << endl;
-    }
-
-    // access the map using iterators
-    cout << "\nVillagers and their favorite colors (iterators):" << endl;
-    for (map<string, vector<string>>::iterator it = villagerColors.begin(); 
-                                               it != villagerColors.end(); ++it) {
-        cout << it->first << ": ";
-        for (auto color : it->second) {
-            cout << color << " ";
-        }
         cout << endl;
     }
 
@@ -52,11 +50,6 @@ int main()
         cout << endl;
     } else
         cout << endl << searchKey << " not found." << endl;
-
-    // report size, clear, report size again to confirm map operations
-    cout << "\nSize before clear: " << villagerColors.size() << endl;
-    villagerColors.clear();
-    cout << "Size after clear: " << villagerColors.size() << endl;
 
     return 0;
 }
