@@ -22,6 +22,44 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
 
 int main() 
 {
+    int userChoice; // to hold the user's choice for the menu option # they would like to select
+
+    do // creation of a do-while loop so that the user can continue to select menu options until they wish to quit program (option #6)
+    { 
+        // creation of a switch statement that handles cases of each numbered menu option based on userChoice
+        switch (userChoice)
+        {
+            case 1:
+            
+                break;
+
+            case 2:
+            
+                break;
+
+            case 3:
+                
+                break;
+            
+            case 4:
+                
+                break;
+
+            case 5:
+                
+                break;
+
+            case 6:
+
+                break;
+            
+            // user input validation for menu option # (has to be 1-6)
+            default:
+                cout << "Invalid choice. Please enter a " << endl;
+        }
+
+    } while (userChoice != 6); // do as long as user does not select option #6 (exit)
+    
     // creation of an std::map named "villagerMember"
     // the key is a string that represents the villager's name
     // the value is an std::tuple that holds 3 elements:
@@ -33,8 +71,12 @@ int main()
     // insert 3 initial villagers into the std::map, so the user starts off with an std::map that is not empty
     // villager info taken from lab instructions
     villagerMember["Drago"] = tuple<int, string, string>(5, "Alligator", "Snap to It!");
-    villagerMember["Kyle"] = 
-    villagerMember["Raymond"] = 
+    villagerMember["Kyle"] = tuple<int, string, string>(10, "Wolf", "Hubba hubba!");
+    villagerMember["Raymond"] = tuple<int, string, string>(8, "Cat", "Nice fit");
+
+    // display the current std::map
+    cout << "These are the initial villagers that have been added -" << endl;
+    outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, will display the current contents of the std::map
 
     return 0;
 }
@@ -107,7 +149,8 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
 
     // get user input for friendship level
     // creation of a do-while loop for user input validatio - ensure the friendship level entered is within the valid range 0-10 
-    do {
+    do 
+    {
         cout << "Friendship level (must be between 0-10): ";
         cin >> friendshipLevel;
 
