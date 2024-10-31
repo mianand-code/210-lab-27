@@ -36,18 +36,6 @@ int main()
     villagerColors["Raymond"] = {"Black", "Gray", "White"};
     villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
 
-    // search for an element using .find() to avoid errors
-    string searchKey = "Audie";
-    auto it = villagerColors.find(searchKey);
-    if (it != villagerColors.end()) {  // the iterator points to beyond the end of the map
-                                       // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s favorite colors: ";
-        for (auto color : it->second)  // range loop to traverse the value/vector
-            cout << color << " ";
-        cout << endl;
-    } else
-        cout << endl << searchKey << " not found." << endl;
-
     return 0;
 }
 
@@ -195,22 +183,22 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
 
 // void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember) function header
 // DESCRIPTION: this function will increase the friendship level of a villager by 1 point
-// - the user will be prompted to provide a choice on which villager they would like this to 
+// - the user will be prompted to provide a choice for which villager they would like to perform this action on
 // - a numbered menu of villagers is provided for the user to choose from and the user must enter a valid numbered option
+// - the user will be prompted to enter a choice until it is valid
 // - the friendship level will only be increased as long as it is within range (not more than 10)
-// - 
 // ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
 // - this refers to the std::map "villagerMember"
 // - passing by reference because the map will be modified
 // RETURNS: nothing, void function
 void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
 {
-    int userChoice; // to hold the numbered option of the villager that the user would like to increase the friendship level of
+    int userChoice; // to hold the numbered option of the villager that the user would like to increase the friendship level for
 
-    cout << "Please select the villager # that you would like to increase the friendship level of -" << endl;
+    cout << "Please select the villager # that you would like to increase the friendship level for -" << endl;
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
 
-    // get user input for villager # they would like to increase the friendship level of
+    // get user input for villager # they would like to increase the friendship level for
     // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
     while (true) // user will be prompted to enter a choice until it is valid
     {
@@ -251,12 +239,79 @@ void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
 }
 
 // void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember) function header
-// DESCRIPTION:
+// DESCRIPTION: this function will decrease the friendship level of a villager by 1 point
+// - the user will be prompted to provide a choice for which villager they would like to perform this action on
+// - a numbered menu of villagers is provided for the user to choose from and the user must enter a valid numbered option
+// - the user will be prompted to enter a choice until it is valid
+// - the friendship level will only be decreased as long as it is within range (not less than 0)
 // ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
 // - this refers to the std::map "villagerMember"
 // - passing by reference because the map will be modified
 // RETURNS: nothing, void function
 void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
 {
+    int userChoice; // to hold the numbered option of the villager that the user would like to decrease the friendship level for
 
+    cout << "Please select the villager # that you would like to decrease the friendship level for -" << endl;
+    outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
+
+    // get user input for villager # they would like to decrease the friendship level for
+    // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
+    while (true) // user will be prompted to enter a choice until it is valid
+    {
+        cout << "Choice --> ";
+        cin >> userChoice;
+
+        // if - determines if the user choice for villager is within a valid range
+        if (userChoice >= 1 && userChoice <= villagerMember.size()) // using .size() member function to measure the current size of the std::map
+        {
+            auto it = villagerMember.begin(); // create an iterator and initialize it to start at the beginning of the std::map by using .begin() member function
+            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to delete
+            {
+                it++;
+            }
+
+            // retrieve the current friendship level of the villager and store it in "friendshipLevel" variable
+            // to ensure we decrease the friendship level only if its within valid range (no less than 0)
+            // it->second accesses the tuple within the map
+            // get<0> accesses first element of the tuple, which is friendship level
+            int friendshipLevel = get<0>(it->second);
+            
+            // if - perform a check to ensure decreasing friendship level will keep the level within the valid range
+            if (friendshipLevel > 0)
+            {
+                friendshipLevel--; // decrease level by a point
+                get<0>(it->second) = friendshipLevel; // update friendship level in the tuple to the new value stored in "friendshipLevel"
+                cout << "The friendship level has been decreased by a point." << endl;
+            }
+            else
+                cout << "Friendship level cannot be decreased. Level is already at the minimum (0)." << endl;
+
+            break; // break out of while (true) loop, meaning userChoice is valid
+        }
+        else
+            cout << "ERROR: Choice must be greater than 0 and cannot exceed size of map. Please try again." << endl;
+            
+    }
+}
+
+// void searchForVillager(const map<string, tuple<int, string, string>> villagerMember) function header
+// DESCRIPTION:
+// ARGUMENTS: const map<string, tuple<int, string, string>> villagerMember
+// - this refers to the std::map "villagerMember"
+// - using const to signify that the map should not change
+// RETURNS: nothing, void function
+void searchForVillager(const map<string, tuple<int, string, string>> villagerMember)
+{
+    // search for an element using .find() to avoid errors
+    string searchKey = "Audie";
+    auto it = villagerColors.find(searchKey);
+    if (it != villagerColors.end()) {  // the iterator points to beyond the end of the map
+                                       // if searchKey is not found
+        cout << "\nFound " << searchKey << "'s favorite colors: ";
+        for (auto color : it->second)  // range loop to traverse the value/vector
+            cout << color << " ";
+        cout << endl;
+    } else
+        cout << endl << searchKey << " not found." << endl;
 }
