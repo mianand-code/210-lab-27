@@ -192,3 +192,50 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
             cout << "ERROR: Choice must be greater than 0 and cannot exceed size of map. Please try again." << endl;
     }
 }
+
+// void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember) function header
+// DESCRIPTION:
+// ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
+// - this refers to the std::map "villagerMember"
+// - passing by reference because the map will be modified
+// RETURNS: nothing, void function
+void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
+{
+    int userChoice; // to hold the numbered option of the villager that the user would like to increase the friendship level of
+
+    cout << "Please select the villager # that you would like to increase the friendship level of -" << endl;
+    outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
+
+    // get user input for villager # they would like to increase the friendship level of
+    // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
+    while (true) // user will be prompted to enter a choice until it is valid
+    {
+        cout << "Choice --> ";
+        cin >> userChoice;
+
+        if (userChoice >= 1 && userChoice <= villagerMember.size()) // using .size() member function to measure the current size of the std::map
+        {
+            auto it = villagerMember.begin(); // create an iterator and initialize it to start at the beginning of the std::map by using .begin() member function
+            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to delete
+            {
+                it++;
+            }
+
+            // retrieve the current friendship level of the villager and store it in "friendshipLevel" variable
+            // to ensure we increase the friendship level only if its within valid range (no more than 10)
+            // it->second accesses the tuple within the map
+            // get<0> accesses first element of the tuple, which is friendship level
+            int friendshipLevel = get<0>(it->second);
+            if (friendshipLevel < 10) // perform a check to ensure increasing friendship level will keep the level within the valid range
+            {
+                friendshipLevel++; // increase level by a point
+                get<0>(it->second) = friendshipLevel; // update friendship level in the tuple to the new value stored in "friendshipLevel"
+                cout << "The friendship level has been increased by a point." << endl;
+            }
+            else
+                cout << "Friendship level cannot be increased. Level is already at the maximum (10)." << endl;
+        }
+        else
+            
+    }
+}
