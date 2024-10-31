@@ -80,6 +80,10 @@ int main()
                 cout << "Invalid choice. Please try again & enter a valid option between 1-6." << endl;
         }
 
+        // after each operation is complete (besides exit), output the map's contents
+        if (userChoice != 6)
+            outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, will display the current contents of the std::map
+
     } while (userChoice != 6); // do as long as user does not select option #6 (exit)
 
     return 0;
@@ -107,6 +111,8 @@ void outputVillagerDetails(const map<string, tuple<int, string, string>> village
         cout << get<1>(villager.second) << ", "; // accesses species
         cout << get<2>(villager.second) << "]" << endl; // accesses catchphrase
     }
+
+     cout << endl;
 }
 
 // void main_menu() function header
@@ -140,6 +146,7 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
     string species; // to hold species of villager
     string catchphrase; // to hold villager's catchphrase
 
+    cout << endl;
     cout << "Please enter all required information to add a villager -" << endl;
 
     // get user input for villager's name
