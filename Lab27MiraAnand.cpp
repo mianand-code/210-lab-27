@@ -303,15 +303,21 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
 // RETURNS: nothing, void function
 void searchForVillager(const map<string, tuple<int, string, string>> villagerMember)
 {
-    // search for an element using .find() to avoid errors
-    string searchKey = "Audie";
-    auto it = villagerColors.find(searchKey);
-    if (it != villagerColors.end()) {  // the iterator points to beyond the end of the map
-                                       // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s favorite colors: ";
-        for (auto color : it->second)  // range loop to traverse the value/vector
-            cout << color << " ";
-        cout << endl;
-    } else
+   // get user input for villager they want to search for (by name/key)
+    string searchKey; // to hold the villager's name (key) to be searched for
+    cout << "Please enter the name of the villager you want to search for (case sensitive): ";
+    cin >> searchKey;
+
+    auto it = villagerMember.find(searchKey); // create an iterator and set it to search for the villager using .find() member function
+
+    if (it != villagerMember.end()) // perform a check using .end() to ensure that the iterator has not gone beyond the range of the std::map
+    { 
+        // display the villager information since it was found
+        cout << "Found the information for " << searchKey << ":" << endl;
+        cout << "Friendship level = " << get<0>(it->second) << endl;
+        cout << "Species = " << get<1>(it->second) << endl;
+        cout << "Catchphrase = " << get<2>(it->second) << endl;
+    } 
+    else
         cout << endl << searchKey << " not found." << endl;
 }
