@@ -155,7 +155,10 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
 }
 
 // void deleteVillager(map<string, tuple<int, string, string>>& villagerMember) function header
-// DESCRIPTION:
+// DESCRIPTION: this function prompts the user to enter a villager they would like to delete from the std::map
+// - a numbered menu of villagers is provided for the user to choose from and the user must enter a valid numbered option
+// - user input validation is included (no # less than 1, no # greater than the size of the std::map)
+// - the user will be prompted to enter a response until it is valid
 // ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
 // - this refers to the std::map "villagerMember"
 // - passing by reference because the map will be modified
@@ -169,7 +172,7 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
 
     // get user input for villager # they would like to delete
     // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
-    while (true)
+    while (true) // user will be prompted to enter a choice until it is valid
     {
         cout << "Choice --> ";
         cin >> userChoice;
@@ -186,6 +189,6 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
             break;
         }
         else
-            cout <<
+            cout << "ERROR: Choice must be greater than 0 and cannot exceed size of map. Please try again." << endl;
     }
 }
