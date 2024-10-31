@@ -22,45 +22,7 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
 
 int main() 
 {
-    int userChoice; // to hold the user's choice for the menu option # they would like to select
-
-    do // creation of a do-while loop so that the user can continue to select menu options until they wish to quit program (option #6)
-    { 
-        // creation of a switch statement that handles cases of each numbered menu option based on userChoice
-        switch (userChoice)
-        {
-            case 1:
-            
-                break;
-
-            case 2:
-            
-                break;
-
-            case 3:
-                
-                break;
-            
-            case 4:
-                
-                break;
-
-            case 5:
-                
-                break;
-
-            case 6:
-
-                break;
-            
-            // user input validation for menu option # (has to be 1-6)
-            default:
-                cout << "Invalid choice. Please enter a " << endl;
-        }
-
-    } while (userChoice != 6); // do as long as user does not select option #6 (exit)
-    
-    // creation of an std::map named "villagerMember"
+     // creation of an std::map named "villagerMember"
     // the key is a string that represents the villager's name
     // the value is an std::tuple that holds 3 elements:
     // 1. friendship level, an int value 0-10
@@ -77,6 +39,48 @@ int main()
     // display the current std::map
     cout << "These are the initial villagers that have been added -" << endl;
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, will display the current contents of the std::map
+    
+    int userChoice; // to hold the user's choice for the menu option # they would like to select
+
+    do // creation of a do-while loop so that the user can continue to select menu options until they wish to quit program (option #6)
+    { 
+        main_menu(); // main_menu() function call, will display the menu of task options the user can choose from
+        cin >> userChoice; // get user input for option they would like to select
+        
+        // creation of a switch statement that handles cases of each numbered menu option based on userChoice
+        switch (userChoice)
+        {
+            case 1:
+                addVillager(villagerMember); // addVillager() function call, will add a villager to the std::map
+                break;
+
+            case 2:
+                deleteVillager(villagerMember); // deleteVillager() function call, will delete a specified villager from the std::map
+                break;
+
+            case 3:
+                increaseFriendship(villagerMember); // increaseFriendship() function call, will increase the friendship level of a certain villager (if within valid range)
+                break;
+            
+            case 4:
+                decreaseFriendship(villagerMember); // decreaseFriendship() function call, will decrease the friendship level of a certain villager (if within valid range)
+                break;
+
+            case 5:
+                searchForVillager(villagerMember); // searchForVillager() function call, will attempt to find a certain villager within the std::map
+                break;
+
+            case 6:
+                // user wants to exit program
+                cout << "Exiting program..." << endl;
+                break;
+            
+            // user input validation for menu option # (has to be 1-6)
+            default:
+                cout << "Invalid choice. Please try again & enter a valid option between 1-6." << endl;
+        }
+
+    } while (userChoice != 6); // do as long as user does not select option #6 (exit)
 
     return 0;
 }
