@@ -2,7 +2,7 @@
 // Module 10, Lesson: std::map & STL Algorithms, Assignment: Villager Map
 // IDE used: Visual Studio Code for Mac
 
-// Disclaimer about the void searchForVillager(const map<string, tuple<int, string, string>>& villagerMember) function:
+// Disclaimer about the void searchForVillager(const map<string, tuple<int, string, string>> villagerMember) function:
 // - The function trusts that the user will search for a villager name exactly as it is stored in the std::map. It is case sensitive.
 
 #include <iostream>
@@ -36,9 +36,6 @@ int main()
     villagerColors["Raymond"] = {"Black", "Gray", "White"};
     villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
 
-    // delete an element
-    villagerColors.erase("Raymond");
-
     // search for an element using .find() to avoid errors
     string searchKey = "Audie";
     auto it = villagerColors.find(searchKey);
@@ -55,13 +52,15 @@ int main()
 }
 
 // void outputVillagerDetails(const map<string, tuple<int, string, string>> villagerMember) function header
-// DESCRIPTION: this function will output the map's contents of villager data/members
+// DESCRIPTION: this function will output the map's contents (villager data/members)
 // ARGUMENTS: const map<string, tuple<int, string, string>> villagerMember
 // - this refers to the std::map "villagerMember"
 // - using const to signify that the map should not change
 // RETURNS: nothing, void function
 void outputVillagerDetails(const map<string, tuple<int, string, string>> villagerMember)
 {
+    int villagerNumber = 1; // to keep a count of the # of villagers in the std::map
+    
     // access the map using a range-based for loop
     cout << "Villager details:" << endl;
     for (auto villager : villagerMember) 
@@ -69,14 +68,15 @@ void outputVillagerDetails(const map<string, tuple<int, string, string>> village
         // villager.first accesses the key (villager's name - string) of the map
         // villager.second accesses the value (std::tuple) of the map
         // get<> is used to access specific elements of the tuple (starts at 0)
-        cout << villager.first << " [" << get<0>(villager.second) << ", "; // accesses friendship level
+        cout << villagerNumber++ << "). " << villager.first << " ["; // villager is numbered and key (name) is accessed
+        cout << get<0>(villager.second) << ", "; // accesses friendship level
         cout << get<1>(villager.second) << ", "; // accesses species
         cout << get<2>(villager.second) << "]" << endl; // accesses catchphrase
     }
 }
 
 // void main_menu() function header
-// DESCRIPTION: this function will display the villager map menu of numbered options that a user can choose from
+// DESCRIPTION: this function will display the villager map menu that a user can choose from
 // ARGUMENTS: no arguments/parameters
 // RETURNS: nothing, void function
 void main_menu()
@@ -149,7 +149,7 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
 
     // add this new villager to the std::map, "villagerMember"
     // user-entered "name" is used as the key 
-    // for the value - create a tuple with the user-entered data and assign it to the std::map entry/key
+    // for the value - create a tuple with the user-entered data and assign/associate it to the std::map's key
     villagerMember[name] = tuple<int, string, string>(friendshipLevel, species, catchphrase);
     cout << name << " added." << endl;
 }
@@ -163,4 +163,7 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
 void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
 {
     int userChoice; // to hold the numbered option of the villager that the user would like to delete
+
+    cout << "Please select the villager # that you would like to delete -" << endl;
+    outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
 }
