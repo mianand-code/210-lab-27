@@ -77,7 +77,8 @@ int main()
             
             // user input validation for menu option # (has to be 1-6)
             default:
-                cout << "Invalid choice. Please try again & enter a valid option between 1-6." << endl;
+                cout << "Invalid choice. Please try again & enter a valid option between 1-6." << endl << endl;
+                continue; // added so villager details are not printed if user selects an invalid menu option
         }
 
         // after each operation is complete (besides exit), output the map's contents
@@ -100,6 +101,7 @@ void outputVillagerDetails(const map<string, tuple<int, string, string>> village
     int villagerNumber = 1; // to keep a count of the # of villagers in the std::map
     
     // access the map using a range-based for loop
+    cout << endl;
     cout << "Villager details:" << endl;
     for (auto villager : villagerMember) 
     {
@@ -146,8 +148,8 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
     string species; // to hold species of villager
     string catchphrase; // to hold villager's catchphrase
 
-    cout << endl;
     cout << "Please enter all required information to add a villager -" << endl;
+    cin.ignore();
 
     // get user input for villager's name
     cout << "Villager name: ";
@@ -362,6 +364,7 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
 {
    // get user input for villager they want to search for (by name/key)
     string searchKey; // to hold the villager's name (key) to be searched for
+    cin.ignore();
     cout << "Please enter the name of the villager you want to search for (case sensitive): ";
     getline(cin, searchKey);
     while (searchKey.empty()) // user input validation, to ensure the field is not left blank
