@@ -166,4 +166,26 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
 
     cout << "Please select the villager # that you would like to delete -" << endl;
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
+
+    // get user input for villager # they would like to delete
+    // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
+    while (true)
+    {
+        cout << "Choice --> ";
+        cin >> userChoice;
+
+        if (userChoice >= 1 && userChoice <= villagerMember.size()) // using .size() member function to measure the current size of the std::map
+        {
+            auto it = villagerMember.begin(); // create an iterator and initialize it to start at the beginning of the std::map by using .begin() member function
+            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to delete
+            {
+                it++;
+            }
+
+            villagerMember.erase(it); // using .erase() member function, to erase the villager at the position of the iterator
+            break;
+        }
+        else
+            cout <<
+    }
 }
