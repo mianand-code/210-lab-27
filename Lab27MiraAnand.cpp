@@ -30,11 +30,11 @@ int main()
     // 3. catchphrase, a string value
     map<string, tuple<int, string, string>> villagerMember;
 
-    // insert elements into the map
-    // note how the right-hand side of the assignment are the vector elements
-    villagerColors["Audie"] = {"Orange", "Yellow", "Red"};
-    villagerColors["Raymond"] = {"Black", "Gray", "White"};
-    villagerColors.insert({"Marshal", {"Blue", "White", "Black"}});
+    // insert 3 initial villagers into the std::map, so the user starts off with an std::map that is not empty
+    // villager info taken from lab instructions
+    villagerMember["Drago"] = tuple<int, string, string>(5, "Alligator", "Snap to It!");
+    villagerMember["Kyle"] = 
+    villagerMember["Raymond"] = 
 
     return 0;
 }
@@ -296,7 +296,10 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
 }
 
 // void searchForVillager(const map<string, tuple<int, string, string>> villagerMember) function header
-// DESCRIPTION:
+// DESCRIPTION: this function will prompt the user to enter a villager name and this name/key will be searched for within the std::map
+// - name entry is case sensitive and the user is informed of this. I have it this way so I could re-use the demo code from the module as much as possible
+// - if the villager is found, the villager's information (tuple) will be printed
+// - the user will be informed if the villager is not found
 // ARGUMENTS: const map<string, tuple<int, string, string>> villagerMember
 // - this refers to the std::map "villagerMember"
 // - using const to signify that the map should not change
@@ -306,7 +309,12 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
    // get user input for villager they want to search for (by name/key)
     string searchKey; // to hold the villager's name (key) to be searched for
     cout << "Please enter the name of the villager you want to search for (case sensitive): ";
-    cin >> searchKey;
+    getline(cin, searchKey);
+    while (searchKey.empty()) // user input validation, to ensure the field is not left blank
+    {
+        cout << "ERROR: Name field cannot remain blank. Please try again & enter a name: ";
+        getline(cin, searchKey);
+    }
 
     auto it = villagerMember.find(searchKey); // create an iterator and set it to search for the villager using .find() member function
 
