@@ -8,7 +8,7 @@
 #include <iostream>
 #include <map> // to use std::map
 #include <string>
-#include <tuple> // so we can use std::tuple instead of std::vector as the data structure being held in the std::map
+#include <tuple> // so we can use std::tuple instead of std::vector as the data structure being held in the std::map's value
 using namespace std;
 
 // function prototypes
@@ -22,10 +22,10 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
 
 int main() 
 {
-     // creation of an std::map named "villagerMember"
+    // creation of an std::map named "villagerMember"
     // the key is a string that represents the villager's name
     // the value is an std::tuple that holds 3 elements:
-    // 1. friendship level, an int value 0-10
+    // 1. friendship level, an int value that will be between 0-10
     // 2. species, a string value
     // 3. catchphrase, a string value
     map<string, tuple<int, string, string>> villagerMember;
@@ -37,37 +37,37 @@ int main()
     villagerMember["Raymond"] = tuple<int, string, string>(8, "Cat", "Nice fit");
 
     // display the current std::map
-    cout << "These are the initial villagers that have been added -" << endl;
+    cout << "These are the initial villagers that have been added -";
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, will display the current contents of the std::map
     
     int userChoice; // to hold the user's choice for the menu option # they would like to select
 
     do // creation of a do-while loop so that the user can continue to select menu options until they wish to quit program (option #6)
     { 
-        main_menu(); // main_menu() function call, will display the menu of task options the user can choose from
+        main_menu(); // main_menu() function call, will display the menu of options the user can choose from
         cin >> userChoice; // get user input for option they would like to select
         
-        // creation of a switch statement that handles cases of each numbered menu option based on userChoice
+        // creation of a switch statement that handles cases of each numbered menu option - based on userChoice
         switch (userChoice)
         {
             case 1:
-                addVillager(villagerMember); // addVillager() function call, will add a villager to the std::map
+                addVillager(villagerMember); // addVillager() function call, will add a new villager to the std::map based on user input
                 break;
 
             case 2:
-                deleteVillager(villagerMember); // deleteVillager() function call, will delete a specified villager from the std::map
+                deleteVillager(villagerMember); // deleteVillager() function call, will delete a user-specified villager from the std::map
                 break;
 
             case 3:
-                increaseFriendship(villagerMember); // increaseFriendship() function call, will increase the friendship level of a certain villager (if within valid range)
+                increaseFriendship(villagerMember); // increaseFriendship() function call, will increase the friendship level of a user-specified villager (if within valid range)
                 break;
             
             case 4:
-                decreaseFriendship(villagerMember); // decreaseFriendship() function call, will decrease the friendship level of a certain villager (if within valid range)
+                decreaseFriendship(villagerMember); // decreaseFriendship() function call, will decrease the friendship level of a user-specified villager (if within valid range)
                 break;
 
             case 5:
-                searchForVillager(villagerMember); // searchForVillager() function call, will attempt to find a certain villager within the std::map
+                searchForVillager(villagerMember); // searchForVillager() function call, will attempt to find a user-specified villager within the std::map
                 break;
 
             case 6:
@@ -81,17 +81,17 @@ int main()
                 continue; // added so villager details are not printed if user selects an invalid menu option
         }
 
-        // after each operation is complete (besides exit), output the map's contents
+        // after each operation is complete (besides exit), output the contents of the std::map
         if (userChoice != 6)
             outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, will display the current contents of the std::map
 
-    } while (userChoice != 6); // do as long as user does not select option #6 (exit)
+    } while (userChoice != 6); // loop as long as user does not select option #6 (exit)
 
     return 0;
 }
 
 // void outputVillagerDetails(const map<string, tuple<int, string, string>> villagerMember) function header
-// DESCRIPTION: this function will output the map's contents (villager data/members)
+// DESCRIPTION: this function will output/display the contents of the std::map (villager members and their data)
 // ARGUMENTS: const map<string, tuple<int, string, string>> villagerMember
 // - this refers to the std::map "villagerMember"
 // - using const to signify that the map should not change
@@ -118,7 +118,7 @@ void outputVillagerDetails(const map<string, tuple<int, string, string>> village
 }
 
 // void main_menu() function header
-// DESCRIPTION: this function will display the villager map menu that a user can choose from
+// DESCRIPTION: this function will output/display the Villager Map Main Menu that a user can choose from
 // ARGUMENTS: no arguments/parameters
 // RETURNS: nothing, void function
 void main_menu()
@@ -134,8 +134,8 @@ void main_menu()
 }
 
 // void addVillager(map<string, tuple<int, string, string>>& villagerMember) function header
-// DESCRIPTION: this function prompts the user to enter information in order to add a new villager to the std::map
-// - all user input is validated and the user will continue to be prompted to enter information until they enter a valid response
+// DESCRIPTION: this function prompts the user to enter villager data in order to add a new villager to the std::map
+// - all user input is validated and the user will continue to be prompted to enter data until they enter a valid response
 // ARGUMENTS: map<string, tuple<int, string, string>>& villagerMember
 // - this refers to the std::map "villagerMember"
 // - passing by reference because the map will be modified
@@ -148,8 +148,8 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
     string species; // to hold species of villager
     string catchphrase; // to hold villager's catchphrase
 
-    cout << "Please enter all required information to add a villager -" << endl;
-    cin.ignore();
+    cout << "Please enter all required data to add a villager -" << endl;
+    cin.ignore(); // needed after cin and before using getline
 
     // get user input for villager's name
     cout << "Villager name: ";
@@ -161,17 +161,17 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
     }
 
     // get user input for friendship level
-    // creation of a do-while loop for user input validatio - ensure the friendship level entered is within the valid range 0-10 
+    // creation of a do-while loop for user input validation - ensure the friendship level entered is within the valid range 0-10 
     do 
     {
         cout << "Friendship level (must be between 0-10): ";
         cin >> friendshipLevel;
 
         if (friendshipLevel < 0 || friendshipLevel > 10)
-            cout << "ERROR: Friendship level must be within the range of 0-10. Please enter a valid level and try again." << endl;
+            cout << "ERROR: Friendship level must be between 0-10. Please enter a valid level and try again." << endl;
 
     } while (friendshipLevel < 0 || friendshipLevel > 10);
-    cin.ignore(); // needed before we can read another string input
+    cin.ignore(); // needed after cin and before using getline
 
     // get user input for species of villager
     cout << "Species: ";
@@ -199,7 +199,7 @@ void addVillager(map<string, tuple<int, string, string>>& villagerMember)
 }
 
 // void deleteVillager(map<string, tuple<int, string, string>>& villagerMember) function header
-// DESCRIPTION: this function prompts the user to enter a villager they would like to delete from the std::map
+// DESCRIPTION: this function prompts the user to choose a villager they would like to delete from the std::map
 // - a numbered menu of villagers is provided for the user to choose from and the user must enter a valid numbered option
 // - user input validation is included (no # less than 1, no # greater than the size of the std::map)
 // - the user will be prompted to enter a response until it is valid
@@ -215,7 +215,7 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
 
     // get user input for villager # they would like to delete
-    // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
+    // user input validation is included, to ensure that the user does not enter any number that is less than 1 or greater than the size of the std::map
     while (true) // user will be prompted to enter a choice until it is valid
     {
         cout << "Choice --> ";
@@ -230,6 +230,7 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerMember)
             }
 
             villagerMember.erase(it); // using .erase() member function, to erase the villager at the position of the iterator
+            cout << "Deletion was successful." << endl;
             break;
         }
         else
@@ -255,32 +256,33 @@ void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
 
     // get user input for villager # they would like to increase the friendship level for
-    // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
+    // user input validation is included, to ensure that the user does not enter any number that is less than 1 or greater than the size of the std::map
     while (true) // user will be prompted to enter a choice until it is valid
     {
         cout << "Choice --> ";
         cin >> userChoice;
 
-        // if - determines if the user choice for villager is within a valid range
+        // determines if the user choice for villager is within a valid range
         if (userChoice >= 1 && userChoice <= villagerMember.size()) // using .size() member function to measure the current size of the std::map
         {
             auto it = villagerMember.begin(); // create an iterator and initialize it to start at the beginning of the std::map by using .begin() member function
-            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to delete
+            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to increase the friendship level for
             {
                 it++;
             }
 
             // retrieve the current friendship level of the villager and store it in "friendshipLevel" variable
-            // to ensure we increase the friendship level only if its within valid range (no more than 10)
+            // we do this to ensure that we increase the friendship level only if it's within valid range (no more than 10)
             // it->second accesses the tuple within the map
             // get<0> accesses first element of the tuple, which is friendship level
             int friendshipLevel = get<0>(it->second);
             
-            // if - perform a check to ensure increasing friendship level will keep the level within the valid range
+            // perform a check to ensure increasing friendship level will keep the level within the valid range
             if (friendshipLevel < 10)
             {
                 friendshipLevel++; // increase level by a point
-                get<0>(it->second) = friendshipLevel; // update friendship level in the tuple to the new value stored in "friendshipLevel"
+                // replace the old tuple with a new tuple that includes the updated friendship level
+                it->second = tuple<int, string, string>(friendshipLevel, get<1>(it->second), get<2>(it->second));
                 cout << "The friendship level has been increased by a point." << endl;
             }
             else
@@ -290,7 +292,6 @@ void increaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
         }
         else
             cout << "ERROR: Choice must be greater than 0 and cannot exceed size of map. Please try again." << endl;
-            
     }
 }
 
@@ -312,32 +313,33 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
     outputVillagerDetails(villagerMember); // outputVillagerDetails() function call, to display the current std::map of villagers
 
     // get user input for villager # they would like to decrease the friendship level for
-    // user input validation is included, to ensure the user does not enter any number less than 1 or greater than the size of the std::map
+    // user input validation is included, to ensure that the user does not enter any number that is less than 1 or greater than the size of the std::map
     while (true) // user will be prompted to enter a choice until it is valid
     {
         cout << "Choice --> ";
         cin >> userChoice;
 
-        // if - determines if the user choice for villager is within a valid range
+        // determines if the user choice for villager is within a valid range
         if (userChoice >= 1 && userChoice <= villagerMember.size()) // using .size() member function to measure the current size of the std::map
         {
             auto it = villagerMember.begin(); // create an iterator and initialize it to start at the beginning of the std::map by using .begin() member function
-            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to delete
+            for (int i = 1; i < userChoice; i++) // using a for loop to advance the iterator to the position of the villager we want to decrease the friendship level for
             {
                 it++;
             }
 
             // retrieve the current friendship level of the villager and store it in "friendshipLevel" variable
-            // to ensure we decrease the friendship level only if its within valid range (no less than 0)
+            // we do this to ensure that we decrease the friendship level only if its within valid range (no less than 0)
             // it->second accesses the tuple within the map
             // get<0> accesses first element of the tuple, which is friendship level
             int friendshipLevel = get<0>(it->second);
             
-            // if - perform a check to ensure decreasing friendship level will keep the level within the valid range
+            // perform a check to ensure decreasing friendship level will keep the level within the valid range
             if (friendshipLevel > 0)
             {
                 friendshipLevel--; // decrease level by a point
-                get<0>(it->second) = friendshipLevel; // update friendship level in the tuple to the new value stored in "friendshipLevel"
+                // replace the old tuple with a new tuple that includes the updated friendship level
+                it->second = tuple<int, string, string>(friendshipLevel, get<1>(it->second), get<2>(it->second)); 
                 cout << "The friendship level has been decreased by a point." << endl;
             }
             else
@@ -347,14 +349,13 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagerMember)
         }
         else
             cout << "ERROR: Choice must be greater than 0 and cannot exceed size of map. Please try again." << endl;
-            
     }
 }
 
 // void searchForVillager(const map<string, tuple<int, string, string>> villagerMember) function header
 // DESCRIPTION: this function will prompt the user to enter a villager name and this name/key will be searched for within the std::map
 // - name entry is case sensitive and the user is informed of this. I have it this way so I could re-use the demo code from the module as much as possible
-// - if the villager is found, the villager's information (tuple) will be printed
+// - if the villager is found, the villager's data (tuple) will be printed
 // - the user will be informed if the villager is not found
 // ARGUMENTS: const map<string, tuple<int, string, string>> villagerMember
 // - this refers to the std::map "villagerMember"
@@ -364,7 +365,7 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
 {
    // get user input for villager they want to search for (by name/key)
     string searchKey; // to hold the villager's name (key) to be searched for
-    cin.ignore();
+    cin.ignore(); // needed after cin and before using getline
     cout << "Please enter the name of the villager you want to search for (case sensitive): ";
     getline(cin, searchKey);
     while (searchKey.empty()) // user input validation, to ensure the field is not left blank
@@ -377,8 +378,9 @@ void searchForVillager(const map<string, tuple<int, string, string>> villagerMem
 
     if (it != villagerMember.end()) // perform a check using .end() to ensure that the iterator has not gone beyond the range of the std::map
     { 
-        // display the villager information since it was found
-        cout << "Found the information for " << searchKey << ":" << endl;
+        // display the villager data since it was found
+        cout << endl;
+        cout << "Found the data for " << searchKey << ":" << endl;
         cout << "Friendship level = " << get<0>(it->second) << endl;
         cout << "Species = " << get<1>(it->second) << endl;
         cout << "Catchphrase = " << get<2>(it->second) << endl;
